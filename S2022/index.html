@@ -3,7 +3,7 @@
 <html lang="en-US">
   <head>
     <meta charset='utf-8'>
-    <title>17-445 Software Engineering for AI-Enabled Systems (SE4AI)</title>
+    <title>17-445 Machine Learning in Production / AI Engineering</title>
     <style type="text/css">
     
       @import url("https://fonts.googleapis.com/css?family=Chivo:900");.highlight table td{padding:5px}.highlight table pre{margin:0}.highlight,.highlight .w{color:#d0d0d0}.highlight .err{color:#151515;background-color:#ac4142}.highlight .c,.highlight .cd,.highlight .cm,.highlight .c1,.highlight .cs{color:#888}.highlight .cp{color:#f4bf75}.highlight .nt{color:#f4bf75}.highlight .o,.highlight .ow{color:#d0d0d0}.highlight .p,.highlight .pi{color:#d0d0d0}.highlight .gi{color:#90a959}.highlight .gd{color:#ac4142}.highlight .gh{color:#6a9fb5;font-weight:bold}.highlight .k,.highlight .kn,.highlight .kp,.highlight .kr,.highlight .kv{color:#aa759f}.highlight .kc{color:#d28445}.highlight .kt{color:#d28445}.highlight .kd{color:#d28445}.highlight .s,.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .sh,.highlight .sx,.highlight .s1{color:#90a959}.highlight .sr{color:#75b5aa}.highlight .si{color:#8f5536}.highlight .se{color:#8f5536}.highlight .nn{color:#f4bf75}.highlight .nc{color:#f4bf75}.highlight .no{color:#f4bf75}.highlight .na{color:#6a9fb5}.highlight .m,.highlight .mf,.highlight .mh,.highlight .mi,.highlight .il,.highlight .mo,.highlight .mb,.highlight .mx{color:#90a959}.highlight .ss{color:#90a959}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{font:inherit;font-size:100%;vertical-align:baseline;border:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-spacing:0;border-collapse:collapse}body{font-family:'Helvetica Neue', Helvetica, Arial, serif;font-size:1em;line-height:1.5;color:#6d6d6d;text-shadow:0 1px 0 rgba(255,255,255,0.8);background:#e7e7e7 url(../images/body-bg.png) 0 0 repeat}a{color:#d5000d}a:hover{color:#c5000c}h1{padding-top:35px} h1{font-family:'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;font-size:48px;font-weight:900;line-height:1.2;color:#303030;letter-spacing:-1px} #cmu-17-445645-fall-2020 {font-size:24px;font-weight:normal;line-height:1.3;color:#aaa;letter-spacing:-1px}#container{min-height:595px;background:transparent url(../images/highlight-bg.jpg) 50% 0 no-repeat}.inner{width:620px;margin:0 auto}#container .inner img{max-width:100%}#downloads{margin-bottom:40px}a.button{display:block;float:left;width:179px;padding:12px 8px 12px 8px;margin-right:14px;font-size:15px;font-weight:bold;line-height:25px;color:#303030;background:#fdfdfd;background:-moz-linear-gradient(top, #fdfdfd 0%, #f2f2f2 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #f2f2f2));background:-webkit-linear-gradient(top, #fdfdfd 0%, #f2f2f2 100%);background:-o-linear-gradient(top, #fdfdfd 0%, #f2f2f2 100%);background:-ms-linear-gradient(top, #fdfdfd 0%, #f2f2f2 100%);background:linear-gradient(to top, #fdfdfd 0%, #f2f2f2 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#f2f2f2',GradientType=0 );border-top:solid 1px #cbcbcb;border-right:solid 1px #b7b7b7;border-bottom:solid 1px #b3b3b3;border-left:solid 1px #b7b7b7;border-radius:30px;-webkit-box-shadow:10px 10px 5px #888;-moz-box-shadow:10px 10px 5px #888;box-shadow:0px 1px 5px #e8e8e8;-moz-border-radius:30px;-webkit-border-radius:30px}a.button:hover{background:#fafafa;background:-moz-linear-gradient(top, #fdfdfd 0%, #f6f6f6 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #f6f6f6));background:-webkit-linear-gradient(top, #fdfdfd 0%, #f6f6f6 100%);background:-o-linear-gradient(top, #fdfdfd 0%, #f6f6f6 100%);background:-ms-linear-gradient(top, #fdfdfd 0%, #f6f6f6 100%);background:linear-gradient(to top, #fdfdfd 0%, #f6f6f6, 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#f6f6f6',GradientType=0 );border-top:solid 1px #b7b7b7;border-right:solid 1px #b3b3b3;border-bottom:solid 1px #b3b3b3;border-left:solid 1px #b3b3b3}a.button span{display:block;height:23px;padding-left:50px}#download-zip span{background:transparent url(../images/zip-icon.png) 12px 50% no-repeat}#download-tar-gz span{background:transparent url(../images/tar-gz-icon.png) 12px 50% no-repeat}#view-on-github span{background:transparent url(../images/octocat-icon.png) 12px 50% no-repeat}#view-on-github{margin-right:0}code,pre{margin-bottom:30px;font-family:Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;font-size:14px;color:#222}code{padding:0 3px;background-color:#f2f2f2;border:solid 1px #ddd}pre{padding:20px;overflow:auto;color:#f2f2f2;text-shadow:none;background:#303030}pre code{padding:0;color:#f2f2f2;background-color:#303030;border:none}ul,ol,dl{margin-bottom:20px}hr{height:1px;padding-bottom:1em;margin-top:1em;line-height:1px;background:transparent url("../images/hr.png") 50% 0 no-repeat;border:none}strong{font-weight:bold}em{font-style:italic}table{width:100%;border:1px solid #ebebeb}th{font-weight:500}td{font-weight:300;border:1px solid #ebebeb}form{padding:20px;background:#f2f2f2}h2{margin-bottom:8px;font-size:22px;font-weight:bold;color:#303030}h3{margin-bottom:8px;font-size:18px;font-weight:bold;color:#d5000d}h4{font-size:16px;font-weight:bold;color:#303030}h5{font-size:1em;color:#303030}h6{font-size:.8em;color:#303030}p{margin-bottom:20px;font-weight:300}a{text-decoration:none}p a{font-weight:400}blockquote{padding:0 0 0 30px;margin-bottom:20px;font-size:1.6em;border-left:10px solid #e9e9e9}ul li{list-style-position:inside;list-style:disc;}ol li{list-style-position:inside;list-style:decimal;padding-left:3px}dl dt{color:#303030}footer{padding-top:20px;padding-bottom:30px;margin-top:40px;font-size:13px;color:#aaa;background:transparent url("../images/hr.png") 0 0 no-repeat}footer a{color:#666}footer a:hover{color:#444}.clearfix:after{display:block;height:0;clear:both;visibility:hidden;content:'.'}.clearfix{display:inline-block}* html .clearfix{height:1%}.clearfix{display:block}@media only screen and (max-width: 767px){header{padding-top:10px;padding-bottom:10px}#downloads{margin-bottom:25px}#download-zip,#download-tar-gz{display:none}.inner{width:94%;margin:0 auto}}
@@ -81,10 +81,250 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>Wed, Jan 19</td>
+<td>Introduction and Motivation</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Fri, Jan 21</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Collaboration: Slack, Git, issue trackers</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Jan 24</td>
+<td>From Models to AI-Enabled Systems (Systems Thinking)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Jan 26</td>
+<td>Model Quality and Unit Testing 1</td>
+<td></td>
+<td>I1: Case Study</td>
+</tr>
+<tr>
+<td>Fri, Jan 28</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Stream processing: Apache Kafka</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Jan 31</td>
+<td>Model Quality and Unit Testing 2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Feb 02</td>
+<td>Goals and Success Measures for AI-Enabled Systems</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Fri, Feb 04</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Unit testing / Measurement</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Feb 07</td>
+<td>Business, Risk, and Planning for Mistakes 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Feb 09</td>
+<td>Business, Risk, and Planning for Mistakes 2</td>
+<td></td>
+<td>M1: Modeling and First Deployment</td>
+</tr>
+<tr>
+<td>Fri, Feb 11</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Requirements/Risk analysis</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Feb 14</td>
+<td>Tradeoffs among Modeling Techniques</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Feb 16</td>
+<td>Architectural Design for AI-enabled Systems</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Fri, Feb 18</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Architecture</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Feb 21</td>
+<td>Quality Assessment in Production</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Feb 23</td>
+<td>Data Quality</td>
+<td></td>
+<td>I2: Requirements and Architecture</td>
+</tr>
+<tr>
+<td>Fri, Feb 25</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Continuous Integration: Jenkins</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Feb 28</td>
+<td>Infrastructure Quality, Deployment, and Operations</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Mar 02</td>
+<td><strong>Midterm</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Fri, Mar 04</td>
+<td><img src="https://img.shields.io/badge/-break-red.svg" alt="Break"> Midsemester break &amp; spring break</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Mar 14</td>
+<td>Managing and Processing Large Datasets</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Mar 16</td>
+<td>Process &amp; Technical Debt</td>
+<td></td>
+<td>I3: Open Source Tools</td>
+</tr>
+<tr>
+<td>Fri, Mar 18</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Containers: Docker</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Mar 21</td>
+<td>Human AI Interaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Mar 23</td>
+<td>Intro to Ethics + Fairness</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Fri, Mar 25</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Monitoring: Prometheus, Grafana</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Mar 28</td>
+<td>Building Fairer AI-Enabled System 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Mar 30</td>
+<td>Building Fairer AI-Enabled System 2</td>
+<td></td>
+<td>M2: Infrastructure Quality</td>
+</tr>
+<tr>
+<td>Fri, Apr 01</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Fairness</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Apr 04</td>
+<td>Explainability &amp; Interpretability 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Apr 06</td>
+<td>Explainability &amp; Interpretability 2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Fri, Apr 08</td>
+<td><img src="https://img.shields.io/badge/-break-red.svg" alt="Break"> Spring carnival, no classes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Apr 11</td>
+<td>Versioning, Provenance, and Reproducability</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Apr 13</td>
+<td>Security and Privacy</td>
+<td></td>
+<td>M3: Monitoring and CD</td>
+</tr>
+<tr>
+<td>Fri, Apr 15</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> Threat modeling</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Apr 18</td>
+<td>Safety 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Apr 20</td>
+<td>Safety 2</td>
+<td></td>
+<td>I4: Fairness</td>
+</tr>
+<tr>
+<td>Fri, Apr 22</td>
+<td><img src="https://img.shields.io/badge/-rec-yellow.svg" alt="Recitation"> tbd.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mon, Apr 25</td>
+<td>Fostering Interdisciplinary Teams</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wed, Apr 27</td>
+<td>Summary and Review</td>
+<td></td>
+<td>M4: Security and Feedback Loops</td>
+</tr>
+<tr>
 <td>tbd</td>
+<td><strong>Final Project Presentations</strong></td>
 <td></td>
-<td></td>
-<td></td>
+<td>Final report</td>
 </tr>
 </tbody></table>
 <p><img src="overview.png" alt="Course topics overview" title="Course topics overview"></p>
