@@ -17,7 +17,7 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><div id="footer">17-445 Machine Learning in Production / AI Engineering, Eunsuk Kang & Christian Kaestner</div><section  data-markdown><script type="text/template">
+      <div class="slides"><div id="footer">17-445 Machine Learning in Production / AI Engineering, Eunsuk Kang & Christian Kaestner</div><section ><section data-markdown><script type="text/template">
 
 # Model Quality
 
@@ -29,8 +29,13 @@ Required reading:
 * 🕮 Hulten, Geoff. "[Building Intelligent Systems: A Guide to Machine Learning Engineering.](https://www.buildingintelligentsystems.com/)" Apress, 2018, Chapter 19 (Evaluating Intelligence).
 * 🗎 Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
 
+</script></section><section data-markdown><script type="text/template">## Administrativa
 
-</script></section><section  data-markdown><script type="text/template">
+* Waitlist update?
+* Teams assigned, see Canvas. More later in the lecture
+* Each team will receive links with details on how to access a virtual machine for the team project late this week
+* You will likely get an email from Amazon AWS with free credits soon
+</script></section></section><section  data-markdown><script type="text/template">
 # Learning Goals
 
 * Select a suitable metric to evaluate prediction accuracy of a model and to compare multiple models
@@ -50,39 +55,41 @@ the data scientist's perspective
 
 the role and lack of specifications, validation vs verification
 
-## Third Part: Learning from Software Testing
+## Third Part: Learning from Software Testing 
 
-unit testing, test case curation, invariants, test case generation
+unit testing, test case curation, invariants, test case generation (next week)
 
-testing in production (next week)
+## Later: Testing in production
 
-
-
-
+monitoring, A/B testing, canary releases (in 2 weeks)
 
 
 
 
 
 
-</script></section><section ><section data-markdown><script type="text/template"># Model Quality vs System Quality
-</script></section><section data-markdown><script type="text/template">## Prediction Accuracy of a Model
 
-*model:* $\overline{X} \rightarrow Y$
 
-*validation data (tests?):* sets of $(\overline{X}, Y)$ pairs indicating desired outcomes for select inputs
 
-For our discussion: any form of model, including machine learning models, scientific models, hardcoded heuristics, composed models, ...
 
-</script></section><section data-markdown><script type="text/template">## Comparing Models
+</script></section><section ><section data-markdown><script type="text/template"># Case Study & Reminder:
+# Model vs System Quality
 
-Compare two models (same or different implementation/learning technology) for the same task:
+</script></section><section data-markdown><script type="text/template">## Case Study: Cancer Prognosis
 
-* Which one supports the system goals better?
-* Which one makes fewer important mistakes?
-* Which one is easier to operate?
-* Which one is better overall?
-* Is either one good enough?
+![radiology](radiology.jpg)
+
+> We should stop training radiologists now. It’s just completely obvious that within five years, deep learning is going to do better than radiologists. -- [Geoffrey Hinton](https://www.youtube.com/watch?v=2HMPRXstSvQ&t=29s), 2016
+
+<aside class="notes"><p>Application to be used in hospitals to screen for cancer, both as routine preventative measure and in cases of specific suspicions. Supposed to work together with physicians, not replace.</p>
+</aside></script></section><section data-markdown><script type="text/template">## The Model is Part of a System in an Environment
+
+![Gnu Health Screenshot](gnuhealth.png)
+<!-- .element: class="stretch" -->
+
+
+(CC BY-SA 4.0, [Martin Sauter](https://commons.wikimedia.org/wiki/Category:GNU_Health#/media/File:Gnu_health_2-8_gynocology_general.png))
+
 
 </script></section><section data-markdown><script type="text/template">## ML Algorithm Quality vs Model Quality vs Data Quality vs System Quality
 
@@ -93,44 +100,60 @@ i.e. assuming *Decision Tree Algorithm* and feature extraction are correctly imp
 The model is just one component of the entire system.
 
 Focus on measuring quality, not debugging the source of quality problems (e.g., in data, in feature extraction, in learning, in infrastructure)
-</script></section><section data-markdown><script type="text/template">## Case Study: Cancer Detection
-
-![MRI](mri.jpg)
-<!-- .element: class="stretch" -->
-
-<aside class="notes"><p>Application to be used in hospitals to screen for cancer, both as routine preventative measure and in cases of specific suspicions. Supposed to work together with physicians, not replace.</p>
-</aside></script></section><section data-markdown><script type="text/template">## The Model is Part of a System in an Environment
-
-![Gnu Health Screenshot](gnuhealth.png)
-<!-- .element: class="stretch" -->
 
 
-(CC BY-SA 4.0, [Martin Sauter](https://commons.wikimedia.org/wiki/Category:GNU_Health#/media/File:Gnu_health_2-8_gynocology_general.png))
-</script></section><section data-markdown><script type="text/template">## Many Qualities
+</script></section><section data-markdown><script type="text/template">## Some System-Level Considerations
+
+* Models used by radiologists, humans in the loop
+* Radiologists are specialists who do not directly see patients
+* Radiologists may not trust model, but are also overworked
+* Radiologist must explain findings
+* Patient can see findings before physician (CURES act)
+</script></section><section data-markdown><script type="text/template">## Many Model Qualities
 
 Prediction accuracy of a model is important
 
-But many other quality matters when building a system:
+But many other *model qualities* matters when building a system:
 * Model size
-* Inference time
+* Inference latency
+* Learning latency
 * User interaction model
-* Kinds of mistakes made
-* How the system deals with mistakes
 * Ability to incrementally learn
-* Safety, security, fairness, privacy
 * Explainability
+* Calibration
+* Robustness
+</script></section><section data-markdown><script type="text/template">## Today and Next Lecture
+
+*Narrow focus on prediction accuracy of the model*
+
+That's difficult enough for now.
+
+More on system vs model goals and other model qualities later
 
 
-*Today: Narrow focus on prediction accuracy of the model*
-</script></section><section data-markdown><script type="text/template">## On Terminology: Performance
 
-In machine learning, "performance" typically refers to accuracy
+
+
+
+
+
+
+
+
+
+</script></section></section><section  data-markdown><script type="text/template"># On Terminology
+
+**Model:** $\overline{X} \rightarrow Y$
+
+**Validation/test data:** sets of $(\overline{X}, Y)$ pairs indicating desired outcomes for select inputs
+
+**Performance:** In machine learning, "performance" typically refers to accuracy
 
 "this model performs better" = it produces more accurate results
 
 Be aware of ambiguity across communities (see also: performance in arts, job performance, company performance, performance test (bar exam) in law, software/hardware/network performance)
 
-* When speaking of "**time**", be explicit: "learning time", "inference time", "latency", ...
+* When speaking of "**time**", be explicit: "learning time", "inference latency", ...
 * When speaking of model **accuracy** use "prediction accuracy", ...
 
 
@@ -144,9 +167,12 @@ Be aware of ambiguity across communities (see also: performance in arts, job per
 
 
 
-</script></section></section><section ><section data-markdown><script type="text/template"># Measuring Prediction Accuracy for Classification Tasks
+</script></section><section ><section data-markdown><script type="text/template"># Measuring Prediction Accuracy for Classification Tasks
 
 (The Data Scientists Toolbox)
+
+
+
 </script></section><section data-markdown><script type="text/template">## Confusion/Error Matrix
 
 <!-- smallish -->
@@ -175,7 +201,15 @@ def accuracy(model, xs, ys):
   return countCorrect / count
 ```
 
+</script></section><section data-markdown><script type="text/template">## Typical Questions
 
+Compare two models (same or different implementation/learning technology) for the same task:
+
+* Which one supports the system goals better?
+* Which one makes fewer important mistakes?
+* Which one is easier to operate?
+* Which one is better overall?
+* Is either one good enough?
 </script></section><section data-markdown><script type="text/template">## Is 99% Accuracy good?
 
 <!-- discussion -->
@@ -194,59 +228,11 @@ $\frac{(1 - accuracy\_\text{baseline}) - (1 - accuracy\_f)}{1 - accuracy\_\text{
 * from 50% to 75% accuracy = 50% reduction in error
 </script></section><section data-markdown><script type="text/template">## Baselines?
 
-Suitable baselines for cancer prediction? For recidivism?
+Suitable baselines for cancer prognosis? For audit risk prediction?
 
 <!-- discussion -->
 
 <aside class="notes"><p>Many forms of baseline possible, many obvious: Random, all true, all false, repeat last observation, simple heuristics, simpler model</p>
-</aside></script></section><section data-markdown><script type="text/template">## Types of Mistakes
-
-Two-class problem of predicting event A:
-
-
-| | **Actually A** | **Actually not A** |
-| --- | --- | --- |
-|**AI predicts A** | True Positive (TP) | False Positive (FP) |
-|**AI predicts not A** | False Negative (FN) | True Negative (TN) |
-
-True positives and true negatives: correct prediction
-
-False negatives: wrong prediction, miss, Type II error
-
-False positives: wrong prediction, false alarm, Type I error
-
- 
-</script></section><section data-markdown><script type="text/template">## Multi-Class problems vs Two-Class Problem
-
-| | **Actually Grade 5 Cancer** | **Actually Grade 3 Cancer** | **Actually Benign** |
-| :--- | --- | --- | --- |
-|**Model predicts Grade 5 Cancer** | **10** | 6 | 2 |
-|**Model predicts Grade 3 Cancer** | 3 | **24**  | 10 |
-|**Model predicts Benign** | 5 | 22 | **82** |
-
-
-
-
-</script></section><section data-markdown><script type="text/template">## Multi-Class problems vs Two-Class Problem
-
-| | **Actually Grade 5 Cancer** | **Actually Grade 3 Cancer** | **Actually Benign** |
-| :--- | --- | --- | --- |
-|**Model predicts Grade 5 Cancer** | **10** | 6 | 2 |
-|**Model predicts Grade 3 Cancer** | 3 | **24**  | 10 |
-|**Model predicts Benign** | 5 | 22 | **82** |
-
-
-****
-
-
-| | **Act. Grade 5 Cancer** | **Act. not Grade 5 Cancer** |
-| --- | --- | --- |
-|**Model predicts Grade 5 Cancer** | 10 | 8 |
-|**Model predicts not Grade 5 Cancer** | 8 | 138 |
-
-
-<aside class="notes"><p>Individual false positive/negative classifications can be derived
-by focusing on a single value in a confusion matrix. False positives/recall/etc are always considered with regard to a single specific outcome.</p>
 </aside></script></section><section data-markdown><script type="text/template">## Consider the Baseline Probability
 
 Predicting unlikely events -- 1 in 2000 has cancer ([stats](https://gis.cdc.gov/Cancer/USCS/DataViz.html))
@@ -280,11 +266,6 @@ Predicting unlikely events -- 1 in 2000 has cancer ([stats](https://gis.cdc.gov/
 See also [Bayesian statistics](https://en.wikipedia.org/wiki/Bayesian_statistics)
 
 
-
-</script></section><section data-markdown><script type="text/template">## Types of Mistakes in Identifying Cancer?
-
-![MRI](mri.jpg)
-<!-- .element: class="stretch" -->
 
 
 
@@ -328,6 +309,8 @@ Consider:
 * Approving loan applications
 
 No answer vs wrong answer?
+
+*(This requires considering interactions with other parts of the system!)*
 </script></section><section data-markdown><script type="text/template">## Extreme Classifiers
 
 * Identifies every instance as negative (e.g., no cancer):
@@ -387,112 +370,28 @@ Turning numeric prediction into classification with threshold ("operating point"
 * Log loss (for class probabilities)
 * Cohen's kappa, Gini coefficient (improvement over random)
 
+</script></section><section data-markdown><script type="text/template">## Many Measures Beyond Classification
+<!-- smallish -->
 
-</script></section></section><section ><section data-markdown><script type="text/template"># Measuring Prediction Accuracy for Regression and Ranking Tasks
-
-(The Data Scientists Toolbox)
-
-</script></section><section data-markdown><script type="text/template">## Confusion Matrix for Regression Tasks?
-
-| Rooms | Crime Rate | ... | Predicted Price | Actual Price |
-| - | - | - | - | - | 
-| 3 | .01 | ... | 230k | 250k |
-| 4 | .01 | ... | 530k | 498k |
-| 2 | .03 | ... | 210k | 211k |
-| 2 | .02 | ... | 219k | 210k |
-
-
-<aside class="notes"><p>Confusion Matrix does not work, need a different way of measuring accuracy that can distinguish &quot;pretty good&quot; from &quot;far off&quot; predictions</p>
-</aside></script></section><section data-markdown><script type="text/template">## Comparing Predicted and Expected Outcomes
-
-<!-- colstart -->
-
-Mean Absolute Percentage Error
-
-**MAPE** = 
-
-$\frac{1}{n}\sum_{t=1}^{n}\left|\frac{A_t-F_t}{A_t}\right|$
-
-($A_t$ actual outcome, $F_t$ predicted outcome, for row $t$)
-
-Compute relative prediction error per row, average over all rows
-
-<!-- col -->
-
-| Rooms | Crime Rate | ... | Predicted Price | Actual Price |
-| - | - | - | - | - | 
-| 3 | .01 | ... | 230k | 250k |
-| 4 | .01 | ... | 530k | 498k |
-| 2 | .03 | ... | 210k | 211k |
-| 2 | .02 | ... | 219k | 210k |
-
-MAPE = $\frac{1}{4}\left( 20/250 + 32/498 + 1/211 + 9/210  \right)$
-= $\frac{1}{4}\left(0.08 + 0.064 + 0.005 + 0.043\right)$ = $0.048$
-
-<!-- colend -->
-</script></section><section data-markdown><script type="text/template">## Other Measures for Regression Models
-
-
-* Mean Absolute Error (MAE) = $\frac{1}{n}\sum_{t=1}^{n}\left|A_t-F_t\right|$
-* Mean Squared Error (MSE) = $\frac{1}{n}\sum_{t=1}^{n}\left(A_t-F_t\right)^2$
-* Root Mean Square Error (RMSE) = $\sqrt{\frac{\sum_{t=1}^{n}(A_t-F_t)^2}{n}}$
+Regression:
+* Mean Squared Error (MSE)
+* Mean Absolute Percentage Error (MAPE)
 * $R^2$ = percentage of variance explained by model
 * ...
-</script></section><section data-markdown><script type="text/template">## Evaluating Rankings
 
-Ordered list of results, true results should be ranked high
-
-Common in information retrieval (e.g., search engines) and recommendations
-
-<!-- colstart -->
-Mean Average Precision 
-
-MAP@K = precision in first $K$ results
-
-Averaged over many queries
-
-<!-- col -->
-| Rank | Product | Correct? |
-| - | - | - |
-|1 | Juggling clubs | true |
-|2 | Bowling pins | false |
-|3| Juggling balls | false |
-|4| Board games | true |
-|5| Wine | false |
-|6| Audiobook | true |
-
-MAP@1 = 1,
-MAP@2 = 0.5,
-MAP@3 = 0.33,
-...
-<!-- colend -->
-
-</script></section><section data-markdown><script type="text/template">## Other Ranking Measures
-
+Rankings:
+* Mean Average Precision in first $K$ results (MAP@K)
 * Mean Reciprocal Rank (MRR) (average rank for first correct prediction)
-* Average precision (concentration of results in highest ranked predictions)
-* MAR@K (recall)
 * Coverage (percentage of items ever recommended)
 * Personalization (how similar predictions are for different users/queries)
-* Discounted cumulative gain
 * ...
 
-<aside class="notes"><p>Good discussion of tradeoffs at <a href="https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832">https://medium.com/swlh/rank-aware-recsys-evaluation-metrics-5191bba16832</a></p>
-</aside></script></section><section data-markdown><script type="text/template">## Model Quality in Natural Language Processing?
-
-Highly problem dependent:
-* Classify text into positive or negative -> classification problem
-* Determine truth of a statement -> classification problem
+Natural language processing:
 * Translation and summarization -> comparing sequences (e.g ngrams) to human results with specialized metrics, e.g. [BLEU](https://en.wikipedia.org/wiki/BLEU) and [ROUGE](https://en.wikipedia.org/wiki/ROUGE_(metric))
 * Modeling text -> how well its probabilities match actual text, e.g., likelyhoold or [perplexity](https://en.wikipedia.org/wiki/Perplexity)
 
 
 </script></section><section data-markdown><script type="text/template">## Always Compare Against Baselines!
-
-Accuracy measures in isolation are difficult to interpret
-
-Report baseline results, reduction in error
-
 
 Example: Baselines for house price prediction? Baseline for shopping recommendations?
 
@@ -521,13 +420,13 @@ Example: Baselines for house price prediction? Baseline for shopping recommendat
 AI research team tried to train image recognition to identify tanks hidden in forests, trained on images of tanks in forests and images of same or similar forests without tanks. The model could clearly separate the learned pictures, but would perform poorly on other pictures.</p>
 <p>Turns out the pictures with tanks were taken on a sunny day whereas the other pictures were taken on a cloudy day. The model picked up on the brightness of the picture rather than the presence of a tank, which worked great for the training set, but did not generalize.</p>
 <p>Pictures: <a href="https://pixabay.com/photos/lost-places-panzer-wreck-metal-3907364/">https://pixabay.com/photos/lost-places-panzer-wreck-metal-3907364/</a>, <a href="https://pixabay.com/photos/forest-dark-woods-trail-path-1031022/">https://pixabay.com/photos/forest-dark-woods-trail-path-1031022/</a></p>
-</aside></script></section><section data-markdown><script type="text/template">## Overfitting in Cancer Detection?
+</aside></script></section><section data-markdown><script type="text/template">## Overfitting in Cancer Prognosis?
 
 <!-- discussion -->
 
 </script></section><section data-markdown><script type="text/template">## Separate Training and Validation Data
 
-Always test for generalization on *unseen* validation data
+Always test for generalization on *unseen* validation data (independently sampled from the same distriution)
 
 Accuracy on training data (or similar measure) used during learning
 to find model parameters
@@ -588,7 +487,7 @@ Change hyperparameter to detect training accuracy (blue)/validation accuracy (re
 
 </script></section><section data-markdown><script type="text/template">## Production Data -- The Ultimate Unseen Validation Data
 
-more next week
+more in a later lecture
 
 
 
@@ -621,8 +520,8 @@ accuracy_test = accuracy(model, test_xs, test_ys)
 </script></section><section data-markdown><script type="text/template">## On Terminology
 
 * The decisions in a model (weights, coefficients) are called *model parameter* of the model, their values are usually learned from the data
-  - To a software engineer, these are *constants* in an algorithm, or configuration options
-* The parameters to the learning algorithm that are not the data are called *model hyperparameters*
+  - To a software engineer, these are *constants* in the learned function
+* The inputs to the learning algorithm that are not the data are called *model hyperparameters*
   - To a software engineer, these are *parameters* to the learning algorithm, similar to compiler options
 
 ```
@@ -653,40 +552,74 @@ def f(outlook, temperature, humidity, windy) =
 </script></section></section><section ><section data-markdown><script type="text/template"># Common Pitfalls of Evaluating Model Quality
 </script></section><section data-markdown><script type="text/template"><!-- discussion -->
 
+</script></section><section data-markdown><script type="text/template">## Test Data not Representative
 
-</script></section><section data-markdown><script type="text/template">## Academic Escalation: Overfitting on Benchmarks
+Often neither training nor test data are representative of production data 
 
+![MNIST Fashion Dataset Examples](MNIST-fashion.png)
 
-[![Overfitting Benchmarks](overfitting-benchmarks.png)](overfitting-benchmarks.png)
-<!-- .element: class="stretch" -->
+</script></section><section data-markdown><script type="text/template">## Test Data not Representative
 
-(Figure by Andrea Passerini)
+![](radiology-distribution.png)
+<!-- .element: class="plain" -->
 
-<aside class="notes"><p>If many researchers publish best results on the same benchmark, collectively they perform &quot;hyperparameter optimization&quot; on the test set</p>
-</aside></script></section><section data-markdown><script type="text/template">## Overfitting in Continuous Experimentation Systems
+</script></section><section data-markdown><script type="text/template">## Shortcut Learning 
 
-![MLFlow User Interface](mlflow-web-ui.png)
-<!-- .element: class="stretch" -->
-</script></section><section data-markdown><script type="text/template">## Overfitting in Continuous Experimentation Systems
-
-* Use of test sets to compare (hyperparameter-tuned) models in dashboards 
-  * -> danger of overfitting
-* Need fresh test data regularly
-* Statistical techniques to approximate the needed amount of test data and the needed rotation
+![Shortcut learning illustration from paper below](shortcutlearning.png)
+<!-- .element: class="plain" -->
 
 <!-- references -->
+Figure from: Geirhos, Robert, Jörn-Henrik Jacobsen, Claudio Michaelis, Richard Zemel, Wieland Brendel, Matthias Bethge, and Felix A. Wichmann. "[Shortcut learning in deep neural networks](https://arxiv.org/abs/2004.07780)." Nature Machine Intelligence 2, no. 11 (2020): 665-673.
 
-Recommended reading: Renggli, Cedric, Bojan Karlaš, Bolin Ding, Feng Liu, Kevin Schawinski, Wentao Wu, and Ce Zhang. "[Continuous integration of machine learning models with ease.ml/ci: Towards a rigorous yet practical treatment.](https://arxiv.org/abs/1903.00278)" arXiv preprint arXiv:1903.00278 (2019).
+<aside class="notes"><p>(From figure caption) Toy example of shortcut learning in neural networks. When trained on a simple dataset
+of stars and moons (top row), a standard neural network (three layers, fully connected) can easily
+categorise novel similar exemplars (mathematically termed i.i.d. test set, defined later in Section 3).
+However, testing it on a slightly different dataset (o.o.d. test set, bottom row) reveals a shortcut
+strategy: The network has learned to associate object location with a category. During training,
+stars were always shown in the top right or bottom left of an image; moons in the top left or bottom
+right. This pattern is still present in samples from the i.i.d. test set (middle row) but not in o.o.d. test
+images (bottom row), exposing the shortcut.</p>
+</aside></script></section><section data-markdown><script type="text/template">## Shortcut Learning 
 
-</script></section><section data-markdown><script type="text/template">## Evaluating on Training Data
+![ML image captioning mistakes](mistakes.jpg)
+<!-- .element: class="stretch" -->
+</script></section><section data-markdown><script type="text/template">## Other Examples of Shortcut Learning?
 
-* surprisingly common in practice
-* by accident, incorrect split -- or intentional using all data for training
-* overlap between multiple datasets used
-* tuning on validation data (e.g., crossvalidation) without separate testing data
+<!-- discussion -->
+
+</script></section><section data-markdown><script type="text/template">## Generalization Beyond Training Data: 
+## Is this even fair to ask?
+
+<!-- discussion -->
+
+
+</script></section><section data-markdown><script type="text/template">## Representative Test Data in Practice?
+
+* Target distribution may not be known in early stages of the project
+* Production data is good test data
+* Target distribution may shift over time
 * 
-* Results in overfitting and misleading accuracy measures
-</script></section><section data-markdown><script type="text/template">## Label Leakage
+* Monitoring and continuous data collection important! More later
+
+</script></section><section data-markdown><script type="text/template">
+## Label Leakage
+
+<!-- colstart -->
+![Tank in Forest](tank.jpg)
+<!-- col -->
+![Forest](forest.jpg)
+<!-- colend -->
+
+<aside class="notes"><p>Widely shared story, authenticity not clear:
+AI research team tried to train image recognition to identify tanks hidden in forests, trained on images of tanks in forests and images of same or similar forests without tanks. The model could clearly separate the learned pictures, but would perform poorly on other pictures.</p>
+<p>Turns out the pictures with tanks were taken on a sunny day whereas the other pictures were taken on a cloudy day. The model picked up on the brightness of the picture rather than the presence of a tank, which worked great for the training set, but did not generalize.</p>
+<p>Pictures: <a href="https://pixabay.com/photos/lost-places-panzer-wreck-metal-3907364/">https://pixabay.com/photos/lost-places-panzer-wreck-metal-3907364/</a>, <a href="https://pixabay.com/photos/forest-dark-woods-trail-path-1031022/">https://pixabay.com/photos/forest-dark-woods-trail-path-1031022/</a></p>
+</aside></script></section><section data-markdown><script type="text/template">## Label Leakage
+
+![Radiology scan with metadata](radiology-scan.jpg)
+
+<aside class="notes"><p>The image includes metadata. Models have been found to rely heavily on that metadata, for example what kind of device was used to take the scan.</p>
+</aside></script></section><section data-markdown><script type="text/template">## Label Leakage
 
 Label or close correlates included in inputs 
 
@@ -698,12 +631,49 @@ Examples:
 **Is this a problem or a good thing?**
 
 
+Be cautious of "too good to be true" results
 
-</script></section><section data-markdown><script type="text/template">## Evaluation Data Representative?
 
-Assumption: Independently, randomly drawn from same distribution as training data
 
-Does this distribution correspond to distribution in practice?
+
+</script></section><section data-markdown><script type="text/template">## Evaluating on Training or Validation Data
+
+Test data *leaks* into training data
+
+* surprisingly common in practice
+* by accident, incorrect split -- or intentional using all data for training
+* overlap between multiple datasets used
+* tuning on validation data (e.g., crossvalidation) without separate testing data
+* 
+* Results in overfitting and misleading accuracy measures
+
+</script></section><section data-markdown><script type="text/template">## Overfitting on Benchmarks
+
+
+[![Overfitting Benchmarks](overfitting-benchmarks.png)](overfitting-benchmarks.png)
+<!-- .element: class="stretch plain" -->
+
+(Figure by Andrea Passerini)
+
+<aside class="notes"><p>If many researchers publish best results on the same benchmark, collectively they perform &quot;hyperparameter optimization&quot; on the test set</p>
+</aside></script></section><section data-markdown><script type="text/template">## Overfitting in Continuous Experimentation Systems
+
+![MLFlow User Interface](mlflow-web-ui.png)
+<!-- .element: class="stretch" -->
+</script></section><section data-markdown><script type="text/template">## Overfitting in Continuous Experimentation Systems
+
+* Test data should be used exactly once -- danger of overfitting with reuse
+* Use of test sets to compare (hyperparameter-tuned) models in dashboards 
+  * -> danger of overfitting
+* Need fresh test data regularly
+* Statistical techniques to approximate the needed amount of test data and the needed rotation
+
+<!-- references -->
+
+Recommended reading: Renggli, Cedric, Bojan Karlaš, Bolin Ding, Feng Liu, Kevin Schawinski, Wentao Wu, and Ce Zhang. "[Continuous integration of machine learning models with ease.ml/ci: Towards a rigorous yet practical treatment.](https://arxiv.org/abs/1903.00278)" arXiv preprint arXiv:1903.00278 (2019).
+
+
+
 </script></section><section data-markdown><script type="text/template">## Using Misleading Quality Measures
 
 * using accuracy, when false positives are more harmful than false negatives
@@ -748,47 +718,30 @@ https://www.fast.ai/2017/11/13/validation-sets/
 <li>Sales from same user</li>
 <li>Pictures taken on same day</li>
 </ul>
-</aside></script></section><section data-markdown><script type="text/template">## Data Dependence and Label Leakage in Cancer Case Study?
+</aside></script></section><section data-markdown><script type="text/template">## Data Dependence in Cancer Case Study?
 
 <!-- discussion -->
 
 
-</script></section><section data-markdown><script type="text/template">## Summary: Common Pitfalls
 
+</script></section><section data-markdown><script type="text/template">## Preliminary Summary: Common Pitfalls
+
+* **Always question the i.i.d. assumption**
 * Test data not representative
+* Dependence between training and test data
 * Misleading accuracy metrics
 * Evaluating on training or validation data
-* Dependence between training and test data
 * Label leakage
 * Overfitting on test data through repeated evaluations
 
 **How to avoid? Ensure as part of process?**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script></section></section><section ><section data-markdown><script type="text/template"># What is Correctness Anyway?
+<aside class="notes"><p>i.i.d. = independent and identically distributed</p>
+</aside></script></section></section><section ><section data-markdown><script type="text/template"># What is Correctness Anyway?
 
 specifications, bugs, fit
 
-</script></section><section data-markdown><script type="text/template">## Evaluating a Component's Functional Correctness
+</script></section><section data-markdown><script type="text/template">## SE World: Evaluating a Component's Functional Correctness
 
 *Given a specification, do outputs match inputs?*
 
@@ -802,15 +755,15 @@ specifications, bugs, fit
 float computeDeductions(float agi, Expenses expenses);
 ```
 
-**Each mismatch is considered a bug, should to be fixed*.**
+**Each mismatch is considered a bug, should to be fixed†.**
 
-(*=not every bug is economical to fix, may accept some known bugs)
+(†=not every bug is economical to fix, may accept some known bugs)
 
 
 </script></section><section data-markdown><script type="text/template">## Validation vs Verification
 
 ![Validation vs Verification](validation.png)
-<!-- .element: class="stretch" -->
+<!-- .element: class="plain" -->
 
 </script></section><section data-markdown><script type="text/template">## Validation Problem: Correct but Useless?
 
@@ -919,12 +872,12 @@ Software testing can be applied to many qualities:
 </script></section><section data-markdown><script type="text/template">## Validation vs Verification
 
 ![Validation vs Verification](validation.png)
-<!-- .element: class="stretch" -->
+<!-- .element: class="plain" -->
 
 </script></section><section data-markdown><script type="text/template">## How to evaluate prediction tasks?
 
 
-![Cancer detection with ML](cancerpred.png)
+![Cancer prognosis with ML](cancerpred.png)
 
 ```java
 /**
@@ -938,12 +891,12 @@ boolean hasCancer(Image scan);
 
 We use ML precisely because we do not have a specification (too complex, rules unknown)
 
-![Cancer detection with ML](cancerpred.png)
+![Cancer prognosis with ML](cancerpred.png)
 
 
 No specification that could tell us for any input whether the output is correct
 
-Intuitions, ideas, goals, "implicit specifications", but nothing we can write down!
+Intuitions, ideas, goals, examples, "implicit specifications", but nothing we can write down as rules!
 
 We are usually okay with some wrong predictions
 
@@ -972,11 +925,12 @@ void testPatient2() {
 * Accepting that mistakes will happen, hopefully not to frequently; "95% accuracy" may be pretty good
 * More confident for data similar to training data
 
-![Cancer detection with ML](cancerpred.png)
+![Cancer prognosis with ML](cancerpred.png)
 
 
 
-</script></section><section data-markdown><script type="text/template">
+</script></section><section data-markdown><script type="text/template">## All Models Are Wrong
+
 
 > All models are approximations. Assumptions, whether implied or clearly stated, are never exactly true. **All models are wrong, but some models are useful**. So the question you need to ask is not "Is the model true?" (it never is) but "Is the model good enough for this particular application?" -- George Box
 
@@ -995,7 +949,8 @@ Do not generalize for very small scales, very high speeds, or in very strong gra
 
 <!-- references -->
 Further readings: https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion
-</script></section><section data-markdown><script type="text/template">
+</script></section><section data-markdown><script type="text/template">## All Models Are Wrong
+
 > "Since all models are wrong the scientist cannot obtain a "correct" one by excessive elaboration. On the contrary following William of Occam he should seek an economical description of natural phenomena." -- George Box, 1976
 
  
@@ -1004,12 +959,17 @@ Further readings: https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion
 
 <!-- references -->
 See also https://en.wikipedia.org/wiki/All_models_are_wrong
+</script></section><section data-markdown><script type="text/template">## Does Knowledge Empower Us?
+
+
+> Knowledge is power: The real test of "knowledge" is not whether it is true, but whether it empowers us. Scientists usually assume that no theory is 100 per cent correct. Consequently, truth is a poor test for knowledge. The real test is utility. A theory that enables us to do new things constitutes knowledge. -- Yuval Harari in [Sapiens](https://bookshop.org/books/sapiens-a-brief-history-of-humankind-9781467601573/9780062316110) about Francis Bacon's "*New Instrument*" from 1620
+
 
 
 
 </script></section><section data-markdown><script type="text/template">## Find better models?
 
-![Cancer detection with ML](cancerpred.png)
+![Cancer prognosis with ML](cancerpred.png)
 
 We are looking for models that better **fit** the problem
 
@@ -1089,13 +1049,27 @@ Unlike traditional software do not expect "correctness"
 </script></section><section data-markdown><script type="text/template">## My pet theory: [Machine Learning is Requirements Engineering](https://medium.com/@ckaestne/machine-learning-is-requirements-engineering-8957aee55ef4)
 
 ![Machine Learning Validation vs Verification](mlvalidation.png)
+<!-- .element: class="plain" -->
 
 
+<!-- references -->
 
-Long version: https://medium.com/@ckaestne/machine-learning-is-requirements-engineering-8957aee55ef4
+Long argument: Kaestner, Christian. "[Machine learning is requirements engineering—On the role of bugs, verification, and validation in machine learning](https://medium.com/@ckaestne/machine-learning-is-requirements-engineering-8957aee55ef4)." Medium, 2020.
 
+</script></section><section data-markdown><script type="text/template">## Software Engineering Caveat
 
+* Also software engineers rarely assure "correctness"
+* Testing finds bugs, doesn not assure their absence
+* Formal verification possible, but expensive and rare
+* Real challenges involve interactions with environment, which are hard to specify
+*
+* "Good enough" very common for software quality
+* Evaluating "fit for intended purpose" instead of correctness too
+</script></section><section data-markdown><script type="text/template">
+![](mary-good-enough.png)
 
+<!-- references -->
+Mary Shaw. [Myths and Mythconceptions: What does it mean to be a programming language, anyhow?](https://www.pldi21.org/prerecorded_hopl.K1.html) HOPL IV: History of Programming Languages, 2021.
 </script></section><section data-markdown><script type="text/template">## On Terminology
 
 * Avoid term *model bug*, no agreement, no standardization
@@ -1104,37 +1078,6 @@ Long version: https://medium.com/@ckaestne/machine-learning-is-requirements-engi
 * *Verification/validation* analogy may help frame thinking, but will likely be confusing to most without longer explanation
 
 
-</script></section><section data-markdown><script type="text/template">## Excursion: Performance Testing?
-
-* Performance tests are not precise (measurement noise)
-    * Averaging over repeated executions *of the same test*
-    * Commonly using diverse benchmarks, i.e., *multiple inputs*
-    * Need to control environment (hardware)
-* No precise specification
-    * Regression tests
-    * Benchmarking as open-ended comparison, or tracking results over time
-
-
-```java
-@Test(timeout=100) 
-public void testCompute() {
-   expensiveComputation(...);
-}
-```
-
-**Is this a better analogy for model quality?**
-
-
-</script></section><section data-markdown><script type="text/template">## Excursion: Performance Testing is Poor Analogy
-
-* Performance specifications tend to be weak
-  - no precise expectations
-  - partial specifications
-* Performance specifications are probabilistic, because algorithm behavior is nondeterministic
-  - "90% of executions shall terminate in less than 1s"
-  - but: *repetitions of same program, capturing nondeterminism in program*
-* ML models are usually deterministic
-  - accuracy measured across multiple inputs, not repeated evaluation of same input
 
 
 
@@ -1170,10 +1113,7 @@ public void testCompute() {
 
 
 
-
-
-
-</script></section></section><section ><section data-markdown><script type="text/template"># Curating Validation Data
+</script></section></section><section ><section data-markdown><script type="text/template"># Curating Validation Data & Input Slicing
 
 (Learning from Software Testing)
 
@@ -1224,12 +1164,12 @@ leap days and month lengths) or can focus on implementation</p>
 </aside></script></section><section data-markdown><script type="text/template">## Software Test Case Design
 
 * Opportunistic/exploratory testing: Add some unit tests, without much planning
-* Black-box testing: Derive test cases from specifications
+* Specification-based testing ("black box"): Derive test cases from specifications
     - Boundary value analysis
     - Equivalence classes
     - Combinatorial testing
     - Random testing
-* White-box testing: Derive test cases to cover implementation paths
+* Structural testing ("white box"): Derive test cases to cover implementation paths
     - Line coverage, branch coverage
     - Control-flow, data-flow testing, MCDC, ...
 *
@@ -1283,6 +1223,8 @@ def busTicketPrice(age: Int,
 
 *(note, similar to requirements validation: did we hear all/representative stakeholders)*
 
+
+
 </script></section><section data-markdown><script type="text/template">## Not All Inputs are Equal
 
 ![Google Home](googlehome.jpg)
@@ -1314,9 +1256,9 @@ Curate Validation Data for Specific Problems and Subpopulations:
 * *Uniformness/fairness testing:* Separate validation dataset for different subpopulations (e.g., accents) -- expect comparable accuracy
 * *Setting goals:* Validation datasets for challenging cases or stretch goals -- accept lower accuracy
 
-Derive from requirements, experts, user feedback, expected problems etc. Think *blackbox testing*.
+Derive from requirements, experts, user feedback, expected problems etc. Think *specification-based testing*.
 
-</script></section><section data-markdown><script type="text/template">## Important Input Groups for Cancer Detection?
+</script></section><section data-markdown><script type="text/template">## Important Input Groups for Cancer Prognosis?
 
 <!-- discussion -->
 
@@ -1354,7 +1296,7 @@ Input divided by genre, rating, and length. Accuracy differs, but also amount of
 Source: Barash, Guy, Eitan Farchi, Ilan Jayaraman, Orna Raz, Rachel Tzoref-Brill, and Marcel Zalmanovici. "Bridging the gap between ML solutions and their business requirements using feature interactions." In Proc. Symposium on the Foundations of Software Engineering, pp. 1048-1058. 2019.
 </script></section><section data-markdown><script type="text/template">## Input Partitioning Discussion
 
-**How to slice evaluation data for cancer detection?**
+**How to slice evaluation data for cancer prognosis?**
 
 <!-- discussion -->
 
@@ -1376,7 +1318,20 @@ Ré, Christopher, Feng Niu, Pallavi Gudipati, and Charles Srisuwananukorn. "[Ove
 <!-- references -->
 
 Ré, Christopher, Feng Niu, Pallavi Gudipati, and Charles Srisuwananukorn. "[Overton: A Data System for Monitoring and Improving Machine-Learned Products](https://arxiv.org/abs/1909.05372)." arXiv preprint arXiv:1909.05372 (2019).
-</script></section><section data-markdown><script type="text/template">## Testing Capabilities ("Stress Testing")
+
+
+
+
+
+
+</script></section></section><section ><section data-markdown><script type="text/template"># Testing Model Capabilities
+
+("stress testing")
+
+<!-- references -->
+
+Further reading: Christian Kaestner. [Rediscovering Unit Testing: Testing Capabilities of ML Models](https://towardsdatascience.com/rediscovering-unit-testing-testing-capabilities-of-ml-models-b008c778ca81). Toward Data Science, 2021.
+</script></section><section data-markdown><script type="text/template">## Testing Capabilities
 
 Even without specifications, are there "concepts" or "capabilities" the model should learn?
 
@@ -1397,7 +1352,7 @@ For each capability create specific test set (multiple examples) -- manually or 
 
 Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
 
-</script></section><section data-markdown><script type="text/template">## Testing Capabilities ("Stress Testing")
+</script></section><section data-markdown><script type="text/template">## Testing Capabilities 
 
 ![Examples of Capabilities from Checklist Paper](capabilities1.png)
 
@@ -1406,7 +1361,7 @@ Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond
 
 From: Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
 
-</script></section><section data-markdown><script type="text/template">## Testing Capabilities ("Stress Testing")
+</script></section><section data-markdown><script type="text/template">## Testing Capabilities 
 
 ![Examples of Capabilities from Checklist Paper](capabilities2.png)
 
@@ -1414,29 +1369,37 @@ From: Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[
 <!-- references -->
 
 From: Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
-</script></section><section data-markdown><script type="text/template">## Example of Capabilities
+</script></section><section data-markdown><script type="text/template">## Examples of Capabilities
 
-**What could be capabilities of the cancer detector?**
+**What could be capabilities of the cancer classifier?**
 
-![MRI](mri.jpg)
-<!-- .element: class="stretch" -->
-</script></section><section data-markdown><script type="text/template">## Example of Capabilities
+![radiology](radiology.jpg)
 
-**What could be capabilities of image captioning system?**
-
-![Image captioning task](imgcaptioning.png)
-
-</script></section><section data-markdown><script type="text/template">## Is it fair to expect generalization beyond training distribution?
+</script></section><section data-markdown><script type="text/template">## Recall: Is it fair to expect generalization beyond training distribution?
 
 
-<!-- discussion -->
+![](radiology-distribution.png)
+<!-- .element: class="plain" -->
 
 *For example, shall a cancer detector generalize to other hospitals? Shall image captioning generalize to describing pictures of star formations?*
 
 <aside class="notes"><p>We wouldn&#39;t test a first year elementary school student on high-school math. This would be &quot;out of the training distribution&quot;</p>
-</aside></script></section><section data-markdown><script type="text/template">## Generalization beyond Training Distribution?
+</aside></script></section><section data-markdown><script type="text/template">## Recall: Shortcut Learning
 
-* Typically training and validation data from same distribution (e.g., crossvalidation)
+![Shortcut learning illustration from paper below](shortcutlearning.png)
+<!-- .element: class="plain" -->
+
+<!-- references -->
+Figure from: Geirhos, Robert, Jörn-Henrik Jacobsen, Claudio Michaelis, Richard Zemel, Wieland Brendel, Matthias Bethge, and Felix A. Wichmann. "[Shortcut learning in deep neural networks](https://arxiv.org/abs/2004.07780)." Nature Machine Intelligence 2, no. 11 (2020): 665-673.
+</script></section><section data-markdown><script type="text/template">## More Shortcut Learning :)
+
+![Cows with different backgrounds](shortcutlearning-cows.png)
+
+<!-- references -->
+Figure from Beery, Sara, Grant Van Horn, and Pietro Perona. “Recognition in terra incognita.” In Proceedings of the European Conference on Computer Vision (ECCV), pp. 456–473. 2018.
+</script></section><section data-markdown><script type="text/template">## Generalization beyond Training Distribution?
+
+* Typically training and validation data from same distribution (i.i.d. assumption!)
 * Many models can achieve similar accuracy
 * Models that learn "right" abstractions possibly indistinguishable from models that use shortcuts
   - see tank detection example
@@ -1453,6 +1416,8 @@ See discussion in D'Amour, Alexander, Katherine Heller, Dan Moldovan, Ben Adlam,
 
 * Capabilities are "partial specifications", given beyond training data
 * Encode domain knowledge of the problem
+  * Capabilities are inherently domain specific
+  * Curate capability-specific test data for a problem
 * Testing for capabilities helps to distinguish models that use intended abstractions
 * May help find models that generalize better
 
@@ -1461,21 +1426,101 @@ See discussion in D'Amour, Alexander, Katherine Heller, Dan Moldovan, Ben Adlam,
 <!-- references -->
 
 See discussion in D'Amour, Alexander, Katherine Heller, Dan Moldovan, Ben Adlam, Babak Alipanahi, Alex Beutel, Christina Chen et al. "[Underspecification presents challenges for credibility in modern machine learning](https://arxiv.org/abs/2011.03395)." arXiv preprint arXiv:2011.03395 (2020).
+</script></section><section data-markdown><script type="text/template">
+## Strategies for identifying capabilities
 
-<!-- </script></section><section data-markdown><script type="text/template">## How much validation data?
+* Analyze common mistakes (e.g., classify past mistakes in cancer prognosis)
+* Use existing knowledge about the problem (e.g., linguistics theories)
+* Observe humans (e.g., how do radiologists look for cancer)
+* Derive from requirements (e.g., fairness)
+* Causal discovery from observational data?
 
-* Problem dependent
-* Statistics can give confidence interval for results
-    - e.g. [Sample Size Calculator](https://www.surveysystem.com/sscalc.htm): 384 samples needed for ±5% confidence interval (95% conf. level; 1M population)
-* Experience and heuristics. Example: Hulten's heuristics for stable problems: 
-    - 10s is too small
-    - 100s sanity check
-    - 1000s usually good
-    - 10000s probably overkill
-    - Reserve 1000s recent data points for evaluation (or 10%, whichever is more)
-    - Reserve 100s for important subpopulations
- -->
-</script></section><section data-markdown><script type="text/template">## Summary: Black-Box Testing Techniques as Inspiration
+<!-- references -->
+
+Further reading: Christian Kaestner. [Rediscovering Unit Testing: Testing Capabilities of ML Models](https://towardsdatascience.com/rediscovering-unit-testing-testing-capabilities-of-ml-models-b008c778ca81). Toward Data Science, 2021.
+
+
+</script></section><section data-markdown><script type="text/template">## Examples of Capabilities
+
+**What could be capabilities of image captioning system?**
+
+![Image captioning task](imgcaptioning.png)
+
+
+</script></section><section data-markdown><script type="text/template">## Generating Test Data for Capabilities
+
+**Idea 1: Domain-specific generators**
+
+Testing *negation* in sentiment analysis with template: <br/>
+`I {NEGATION} {POS_VERB} the {THING}.`
+
+Testing texture vs shape priority with artificial generated images:
+![Texture vs shape example](texturevsshape.png)
+
+
+<!-- references -->
+Figure from Geirhos, Robert, Patricia Rubisch, Claudio Michaelis, Matthias Bethge, Felix A. Wichmann, and Wieland Brendel. “ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness.” In Proc. International Conference on Learning Representations (ICLR), (2019).
+</script></section><section data-markdown><script type="text/template">## Generating Test Data for Capabilities
+
+**Idea 2: Mutating existing inputs**
+
+Testing *synonyms* in sentiment analysis by replacing words with synonyms, keeping label
+
+Testing *robust against noise and distraction* add `and false is not true` or random URLs to text
+
+![Examples of Capabilities from Checklist Paper](capabilities1.png)
+
+
+<!-- references -->
+
+Figure from: Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
+
+</script></section><section data-markdown><script type="text/template">## Generating Test Data for Capabilities
+
+**Idea 3: Crowd-sourcing test creation**
+
+Testing *sarcasm* in sentiment analysis: Ask humans to minimally change text to flip sentiment with sarcasm
+
+Testing *background* in object detection: Ask humans to take pictures of specific objects with unusual backgrounds
+
+![Example of modifications to text](sarcasm.png)
+
+<!-- references -->
+
+Figure from: Kaushik, Divyansh, Eduard Hovy, and Zachary C. Lipton. “Learning the difference that makes a difference with counterfactually-augmented data.” In Proc. International Conference on Learning Representations (ICLR), (2020).
+</script></section><section data-markdown><script type="text/template">## Generating Test Data for Capabilities
+
+**Idea 4: Slicing test data**
+
+Testing *negation* in sentiment analysis by finding sentences containing 'not'
+
+
+![Overton system](overton.png)
+
+
+<!-- references -->
+
+Ré, Christopher, Feng Niu, Pallavi Gudipati, and Charles Srisuwananukorn. "[Overton: A Data System for Monitoring and Improving Machine-Learned Products](https://arxiv.org/abs/1909.05372)." arXiv preprint arXiv:1909.05372 (2019).
+
+
+</script></section><section data-markdown><script type="text/template">## Examples of Capabilities
+
+**How to generate test data for capabilities of the cancer classifier?**
+
+![radiology](radiology.jpg)
+
+</script></section><section data-markdown><script type="text/template">## Testing vs Training Capabilities
+
+* Dual insight for testing and training
+* Strategies for curating test data can also help select training data
+* Generate capability-specific training data to guide training (data augmentation)
+
+<!-- references -->
+
+Further reading on using domain knowledge during training: Von Rueden, Laura, Sebastian Mayer, Jochen Garcke, Christian Bauckhage, and Jannis Schuecker. "Informed machine learning–towards a taxonomy of explicit integration of knowledge into machine learning." Learning 18 (2019): 19-20.
+
+ 
+</script></section><section data-markdown><script type="text/template">## Preliminary Summary: Specification-Based Testing Techniques as Inspiration
 
 * Boundary value analysis
 * Partition testing & equivalence classes
@@ -1529,6 +1574,9 @@ void testNextDate() {
 ```
 
 **But is it useful?**
+</script></section><section data-markdown><script type="text/template">## Cancer in Random Image?
+
+![](white-noise.jpg)
 </script></section><section data-markdown><script type="text/template">## Randomly Generating "Realistic" Inputs is Possible
 
 
@@ -1738,6 +1786,7 @@ Paths:
 * Using knowledge about feature distributions (sample from each feature's distribution)
 * Knowledge about dependencies among features and whole population distribution (e.g., model with probabilistic programming language)
 * Mutate from existing inputs (e.g., small random modifications to select features)
+* Generate "fake data" with Generative Adversarial Networks
 
 </script></section><section data-markdown><script type="text/template">## Machine Learned Models = Untestable Software?
 
@@ -1773,6 +1822,23 @@ Exploit relationships between inputs
 </script></section><section data-markdown><script type="text/template">## Invariants in Machine Learned Models?
 
 <!-- discussion -->
+</script></section><section data-markdown><script type="text/template">## Some Capabilities are Invariants
+
+**Some capability tests can be expressed as invariants and automatically encoded as transformations to existing test data**
+
+
+* Negation should flip sentiment analysis result
+* Typos should not affect sentiment analysis result
+* Changes to locations or names should not affect sentiment analysis results
+
+![Examples of NLP capability tests](capabilities1.png)
+
+
+<!-- references -->
+
+From: Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
+
+
 </script></section><section data-markdown><script type="text/template">## Examples of Invariants 
 
 * Credit rating should not depend on gender:
@@ -1799,21 +1865,6 @@ $\forall x. f(g\_I(x)) = g\_O(f(x))$
 
 e.g. $g\_I(x)= \texttt{replace}(x, \text{" is ", " is not "})$ and $g\_O(x)=\neg x$
 
-</script></section><section data-markdown><script type="text/template">## More Examples
-
-**Some capability tests can be expressed as invariants and automatically encoded as transformations to existing test data**
-
-
-* Negation should flip sentiment analysis result
-* Typos should not affect sentiment analysis result
-* Changes to locations or names should not affect sentiment analysis results
-
-![Examples of NLP capability tests](capabilities1.png)
-
-
-<!-- references -->
-
-From: Ribeiro, Marco Tulio, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "[Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://homes.cs.washington.edu/~wtshuang/static/papers/2020-acl-checklist.pdf)." In Proceedings ACL, p. 4902–4912. (2020).
 
 </script></section><section data-markdown><script type="text/template">## On Testing with Invariants/Assertions
 
@@ -1831,6 +1882,7 @@ Further reading:
 </script></section><section data-markdown><script type="text/template">## Invariant Checking aligns with Requirements Validation
 
 ![Machine Learning Validation vs Verification](mlvalidation.png)
+<!-- .element: class="plain" -->
 
 
 </script></section><section data-markdown><script type="text/template">## Approaches for Checking in Variants
@@ -1881,7 +1933,7 @@ assertEquals(randomNumbers,
     * Render scene -> add noise -> recognize -> compare recognized result with simulator state
 * Quality depends on quality of the simulator and how well it can produce inputs from outputs: 
     * examples: render picture/video, synthesize speech, ... 
-    * Less suitable where input-output relationship unknown, e.g., cancer detection, housing price prediction, shopping recommendations
+    * Less suitable where input-output relationship unknown, e.g., cancer prognosis, housing price prediction, shopping recommendations
 <!-- col -->
 ```mermaid
 graph TD;
@@ -1894,7 +1946,7 @@ graph TD;
 
 Further readings: Zhang, Mengshi, Yuqun Zhang, Lingming Zhang, Cong Liu, and Sarfraz Khurshid. "DeepRoad: GAN-based metamorphic testing and input validation framework for autonomous driving systems." In Proceedings of the 33rd ACM/IEEE International Conference on Automated Software Engineering, pp. 132-142. 2018.
 
-</script></section><section data-markdown><script type="text/template">## Summary: Invariants and Generation
+</script></section><section data-markdown><script type="text/template">## Preliminary Summary: Invariants and Generation
 
 * Generating sample inputs is easy, but knowing corresponding outputs is not (oracle problem)
 * Crashing bugs are not a concern
@@ -1920,7 +1972,7 @@ Further readings: Zhang, Mengshi, Yuqun Zhang, Lingming Zhang, Cong Liu, and Sar
 
 ![](coverage.png)
 
-</script></section><section data-markdown><script type="text/template">## Example: White-box testing
+</script></section><section data-markdown><script type="text/template">## Example: Structural testing
 
 ```java
 int divide(int A, int B) {
@@ -1937,7 +1989,7 @@ int divide(int A, int B) {
 
 ![](coverage.png)
 
-</script></section><section data-markdown><script type="text/template">## Defining White-Box Testing
+</script></section><section data-markdown><script type="text/template">## Defining Structural Testing ("white box")
 
 * Test case creation is driven by the implementation, not the specification
 * Typically aiming to increase coverage of lines, decisions, etc
@@ -2078,7 +2130,7 @@ Matei Zaharia. [Introducing MLflow: an Open Source Machine Learning Platform](ht
 * Software bugs vs model fit in the absence of specifications
 * Curating test data
     - Analyzing specifications, capabilities
-    - Not all inputs are equal: Identify important inputs (inspiration from blackbox testing)
+    - Not all inputs are equal: Identify important inputs (inspiration from specification-based testing)
     - Slice data for evaluation
 * Automated random testing 
     - Feasible with invariants (e.g. metamorphic relations)
