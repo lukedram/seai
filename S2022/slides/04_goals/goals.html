@@ -52,10 +52,10 @@ Suggested complementary reading: Ajay Agrawal, Joshua Gans, Avi Goldfarb. “[Pr
 <!-- .element: class="stretch" -->
 </script></section><section data-markdown><script type="text/template">## When not to use Machine Learning?
 
-* Clear specifications are available
+* Clear specifications are available 
 * Simple heuristics are *good enough*
-* Cost of building and maintaining the ML system outweighs its benefits
-(see the [technical debt paper](https://research.google/pubs/pub43146.pdf))
+* Cost of building and maintaining the ML system outweighs its
+benefits (see the [technical debt paper](https://research.google/pubs/pub43146.pdf))
 * Correctness is of utmost importance
 * ML is used only for the hype (e.g., to attract funding)
 
@@ -66,21 +66,20 @@ Suggested complementary reading: Ajay Agrawal, Joshua Gans, Avi Goldfarb. “[Pr
 <p>Accounting systems, inventory tracking, physics simulations, safety railguards, fly-by-wire</p>
 </aside></script></section><section data-markdown><script type="text/template">## Consider Non-ML Baselines
 
-* Consider simple heuristics -- how far can you get?
-* Consider semi-manual approaches -- cost and benefit?
-* Consider the system without that feature
-*
-* **Discuss Examples**
-    - Ranking apps, recommending products
-    - Filtering spam or malicious advertisement
-    - Creating subtitles for conference videos
-    - Summarizing soccer games
+* Consider simple heuristics -- how far can you get? <!-- .element: class="fragment" -->
+* Consider semi-manual approaches -- cost and benefit? <!-- .element: class="fragment" -->
+* Consider the system without that feature <!-- .element: class="fragment" -->
+* Examples: <!-- .element: class="fragment" -->
+    - Recommending products on Amazon
+    - Filtering comments with profanity on public forums
+	- Credit card fraud detection
     - Controlling a washing machine
 </script></section><section data-markdown><script type="text/template">## When to use Machine Learning
 
 * Big problems: Many inputs, massive scale
-* Open-ended problems: No single solution, incremental improvements, continue to grow
-* Time-changing problems: Adapting to constant change, learn with users
+* Open-ended problems: No single "final" solution; incremental
+  improvements and growth over time
+* Time-changing problems: Adapting to constant changes, learning with users
 * Intrinsically hard problems: Unclear rules, heuristics perform poorly
 
 **Examples?**
@@ -162,10 +161,10 @@ LI --> OO(Organizational objectives)
     - Social justice improved, well-being elevated, fairness improved
 * Often not directly measurable from system output; slow indicators
 
-**Accurate models themselves are not the ultimate goal!**
+**Implication: Accurate ML models themselves are not the ultimate goal!**
 
-**AI may only very indirectly influence such organizational
-  objectives; influence hard to quantify; lagging measures**
+**ML may only indirectly influence such organizational
+  objectives; influence is often hard to quantify; lagging measures**
 
 
 <!-- ---- -->
@@ -184,24 +183,27 @@ LI --> OO(Organizational objectives)
 *Measures correlating with future success, from the business perspective*
 
 * Customers sentiment: Do they like the product? (e.g., surveys, ratings)
+<!-- .element: class="fragment" -->
 * Customer engagement: How often do they use the product?
+<!-- .element: class="fragment" -->
   * Regular use, time spent on site, messages posted
   * Growing user numbers, recommendations
-
-**Indirect proxy measures, lagging, bias**
-
-**Can be misleading (more daily active users => higher profits?)**
-
+* Limitations
+<!-- .element: class="fragment" -->
+  * Often indirect, proxy measures
+  * Can be misleading (e.g., more daily active users => higher profits?)
 </script></section><section data-markdown><script type="text/template">## User Outcomes
 
 *How well the system is serving its users, from the user's perspective*
 
-* Users receive meaningful recommendations, enjoying content
-* Users making better decisions
-* Users saving time due to system
-* Users achieving their goals
-
-**Easier and more granular to measure, but only indirect relation to organization objectives**
+* Examples: 
+<!-- .element: class="fragment" -->
+  * Users choosing recommended items and enjoying them
+  * Users making better decisions
+  * Users saving time thanks to the system
+  * Users achieving their goals
+* Easier and more granular to measure, but only indirect relation to organization objectives
+<!-- .element: class="fragment" -->
 </script></section><section data-markdown><script type="text/template">## Model Properties
 
 *Quality of the model used in a system, from the model's perspective*
@@ -212,7 +214,7 @@ LI --> OO(Organizational objectives)
 * Inference time
 * Training cost
 
-**Not directly linked to business goals**
+**Often not directly linked to organizational goals**
 
 <!-- ---- -->
 <!-- ## Layering of Success Measures -->
@@ -251,18 +253,19 @@ MP(Model properties) --> UO(User outcomes)
 UO --> LI(Leading indicators)
 LI --> OO(Organizational objectives)
 ```
-</script></section><section data-markdown><script type="text/template">## Exercise: Automating Admission Decisions to Master's Program
-<!-- smallish -->
-Discuss in groups, breakout rooms
 
-What are the *goals* behind automating admissions decisions?
+<aside class="notes"><p>Accuracy of song predictions does not necessarily lead to increased
+user engagement (e.g., if the UI is terrible)</p>
+</aside></script></section><section data-markdown><script type="text/template">## Breakout: Automating Admission Decisions to Master's Program
 
-**Organizational objectives, leading indicators, user outcomes, model properties?**
+What are different types of goals behind automating admissions decisions?
 
-Report back in 10 min
-
-<!-- discussion -->
-
+Post answer to `#lecture` in Slack using template:
+> Organizational objective: ...<br />
+> Leading indicators: ...<br />
+> User outcomes: ...<br />
+> Model properties: ...<br />
+> AndrewIDs: ...
 
 
 
@@ -393,7 +396,7 @@ For design strategy, see [Goal-Question-Metric approach](https://en.wikipedia.or
     - "assess developer skills" -> "measure average lines of code produced per day and number of bugs reported on code produced by that developer"
     - "measure customer happiness" -> "report response rate and average customer rating on survey shown to 2% of all customers (randomly selected)"
 * Ideally: An independent party should be able to independently set up infrastructure to measure outcomes
-</script></section><section data-markdown><script type="text/template">## Exercise: Specific Metrics for Spotify Goals?
+</script></section><section data-markdown><script type="text/template">## Example: Specific Metrics for Spotify Goals?
 
 * Organization objectives?
 * Leading indicators?
@@ -426,7 +429,7 @@ For design strategy, see [Goal-Question-Metric approach](https://en.wikipedia.or
     * e.g., Higher SAT scores => higher academic excellence?
 * External validity: Concerns the generalization of the findings to contexts and environments, other than the one studied
 <!-- .element: class="fragment" -->
-	* e.g., Drug effectiveness on test group: Does it hold over the general public? 
+	* e.g., Drug effectiveness on a test group: Does it hold over the general public? 
 </script></section><section data-markdown><script type="text/template">##  Correlation vs Causation
 
 https://www.tylervigen.com/spurious-correlations
