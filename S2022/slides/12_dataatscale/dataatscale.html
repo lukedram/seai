@@ -28,6 +28,10 @@ Christian Kaestner
 Required watching: Molham Aref. [Business Systems with Machine Learning](https://www.youtube.com/watch?v=_bvrzYOA8dY). Guest lecture, 2020.
 
 Suggested reading: Martin Kleppmann. [Designing Data-Intensive Applications](https://dataintensive.net/). OReilly. 2017. 
+</script></section><section  data-markdown><script type="text/template"># Where we are
+
+![Overview](overview.svg)
+<!-- .element: class="plain" -->
 </script></section><section  data-markdown><script type="text/template">
 # Learning Goals
 
@@ -48,6 +52,8 @@ Suggested reading: Martin Kleppmann. [Designing Data-Intensive Applications](htt
 ## Adding capacity
 
 <iframe src="https://giphy.com/embed/3oz8xtBx06mcZWoNJm" width="480" height="362" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+*Stories of catastrophic success?*
 </script></section></section><section ><section data-markdown><script type="text/template">
 # Data Management and Processing in ML-Enabled Systems
 </script></section><section data-markdown><script type="text/template">## Kinds of Data
@@ -101,10 +107,13 @@ More Machines
 * Experimentation at scale
 * Models in safety critical parts
 * Mobile computing, edge computing, cyber-physical systems
+</script></section><section data-markdown><script type="text/template">## Reminder: T-Shaped People
+
+![T-shaped people illustration](tshaped.png)
+<!-- .element: class="plain" -->
 
 
-
-
+Go deeper with: Martin Kleppmann. [Designing Data-Intensive Applications](https://dataintensive.net/). OReilly. 2017. 
 </script></section></section><section ><section data-markdown><script type="text/template"># Excursion: Distributed Deep Learning with the Parameter Server Architecture
 
 <!-- references -->
@@ -384,7 +393,7 @@ Figure based on Christopher Meiklejohn. [Dynamic Reduction: Optimizing Service-l
 Central entry point, authentication, routing, updates, ...
 
 ![API Gateway illustration](apigateway.png)
-<!-- .element: class="stretch" -->
+<!-- .element: class="stretch plain" -->
 
 
 </script></section></section><section ><section data-markdown><script type="text/template"># Batch Processing
@@ -580,9 +589,19 @@ How do you get the right data to the right place in the right format?
 
 <!-- reference -->
 Molham Aref "[Business Systems with Machine Learning](https://www.youtube.com/watch?v=_bvrzYOA8dY)"
-</script></section></section><section ><section data-markdown><script type="text/template"># Excursion: ETL Tools
+</script></section></section><section  data-markdown><script type="text/template"># Breakout: Vimeo Videos
+
+In groups, discuss in slack `#lecture`:
+* How to distribute storage:
+* How to design scalable copy-right protection solution:
+* How to design scalable analytics (views, ratings, ...):
+
+[![Vimeo page](vimeo.png)](https://vimeo.com/about)
+</script></section><section ><section data-markdown><script type="text/template"># Excursion: ETL Tools
 
 Extract, tranform, load
+
+**The data engineer's toolbox**
 </script></section><section data-markdown><script type="text/template">## Data Warehousing (OLAP)
 
 * Large denormalized databases with materialized views for large scale reporting queries
