@@ -60,8 +60,8 @@ Source: Mortiz Hardt, https://fairmlclass.github.io/
 
 * Also called _fairness through blindness_
 * Ignore certain sensitive attributes when making a decision
-* Example: Remove gender or race from a credit card scoring model
-* __Q. Advantages and limitations__?
+* Example: Remove gender or race from a credit scoring model
+* __Q. Easy to implement, but any limitations__?
 </script></section><section data-markdown><script type="text/template">## Recall: Proxies
 
 *Features correlate with protected attributes*
@@ -112,7 +112,7 @@ See for example: Galhotra, Sainyam, Yuriy Brun, and Alexandra Meliou. "[Fairness
 
 * $X$: Feature set (e.g., age, race, education, region, income, etc.,)  
 * $A \in X$: Sensitive attribute (e.g., gender)
-* $R$: Regression score (e.g., predicted likelihood of loan default)
+* $R$: Regression score (e.g., predicted likelihood of on-time loan payment)
 * $Y'$: Classifier output
   * $Y' = 1$ if and only if $R > T$ for some threshold $T$
   * e.g., Grant the loan ($Y' = 1$) if the likelihood of paying back > 80% 
